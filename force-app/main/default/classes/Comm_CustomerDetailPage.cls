@@ -1,5 +1,16 @@
+/*
+* @Purpose: Controller for the Comm_CustomerDetailPage LWC 
+* @Author: Gaurav Fugat
+* @CreatedDate: 06/10/2024
+* @Test Class: not created yet
+* @LastModifiedDate: 
+* @LastModifiedBy: 
+*/
 global class Comm_CustomerDetailPage {
+    //store domainurl
     public static string domainUrl = Url.getOrgDomainUrl().toExternalForm();
+    
+    //Get record details on initial load
     @AuraEnabled
     global static string getDetails(string recordId, string LastName){
         HttpRequest req = new HttpRequest();
@@ -35,6 +46,8 @@ global class Comm_CustomerDetailPage {
             return e.getMessage();
         }
     }
+    
+    //update record on save
     @AuraEnabled
     global static string updateAccountDetails(string recordId,string phone, string tshirtSize,string shoeSize, date dob) {
         HttpRequest req = new HttpRequest();
@@ -72,18 +85,25 @@ global class Comm_CustomerDetailPage {
             return e.getMessage();
         }
     }
+    
+    //get access token for authorization 
     global static string getAccessToken(){
-        //step 1 : get the access token
+        
         Http httpCls = new Http();
         HttpRequest request = new HttpRequest();
-        Boolean isSandbox = [SELECT IsSandbox FROM Organization limit 1].IsSandbox;
+        
+        //set endpoint
         request.setEndpoint('https://login.salesforce.com/services/oauth2/token');
+        
+        //set method and timeout
         request.setMethod('POST');
         request.setTimeout(2 * 60 * 1000);  
         
+        //set header
         request.setHeader('Content-Type','application/x-www-form-urlencoded');   
-        Comm_Creds__c Creds = [ SELECT Client_Id__c,Client_Secret__c,Password__c,User_Name__c FROM Comm_Creds__c WHERE Name = 'Comm Creds' Limit 1];
         
+        //get the client credentials and set the body with it
+        Comm_Creds__c Creds = [ SELECT Client_Id__c,Client_Secret__c,Password__c,User_Name__c FROM Comm_Creds__c WHERE Name = 'Comm Creds' Limit 1];
         request.setBody('grant_type=password' + 
                         '&client_id=' + Creds.Client_Id__c + 
                         '&client_secret=' + Creds.Client_Secret__c + 
@@ -95,14 +115,12 @@ global class Comm_CustomerDetailPage {
         httpResponse response = httpCls.send(request); 
         
         String accesstoken ;
-        String instanceURL ;
         if(response.getStatusCode() == 200){            
             system.debug('## Successfully retrieving access token' ); 
             
             map<string,Object> resultMap = (map<string,Object>)JSON.deserializeUntyped(response.getBody());
             
-            accesstoken = (String)resultMap.get('access_token');
-            instanceURL = (String)resultMap.get('instance_url');                        
+            accesstoken = (String)resultMap.get('access_token');                     
         }
         else{
             system.debug('## Could not retrieve the access token' ); 

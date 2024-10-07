@@ -1,7 +1,15 @@
+/*
+* @Purpose: rest resource to fetch account data on initial load of LWC Comm_CustomerDetailPage
+* @Author: Gaurav Fugat
+* @CreatedDate: 06/10/2024
+* @Test Class: not created yet
+* @LastModifiedDate: 
+* @LastModifiedBy: 
+*/
 @RestResource(urlMapping='/accountDetails/*')
 global with sharing class comm_AccountDetailsRestResource {
 
-    // GET Method to fetch Account details by recordId and LastName
+    // Method to fetch Account details by recordId and LastName
     @HttpPost
     global static Account getAccountDetails() {
         RestContext.response.addHeader('Access-Control-Allow-Origin', '*');
@@ -36,7 +44,5 @@ global with sharing class comm_AccountDetailsRestResource {
         }
 
         return accountRecord;
-    }
-
-    
+    }   
 }

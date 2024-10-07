@@ -1,6 +1,15 @@
+/*
+* @Purpose: rest resource to update account data for LWC Comm_CustomerDetailPage
+* @Author: Gaurav Fugat
+* @CreatedDate: 06/10/2024
+* @Test Class: not created yet
+* @LastModifiedDate: 
+* @LastModifiedBy: 
+*/
 @RestResource(urlMapping='/updateAccountDetails/*')
 global class comm_UpdateAccountDetailsRestResource {
-// POST Method to update the T_shirt_size__c, Shoe_Size__c, and Date_Of_Birth__c fields
+    
+	// POST Method to update the T_shirt_size__c, Shoe_Size__c, and Date_Of_Birth__c fields
     @HttpPost
     global static String updateAccountDetails() {
         RestRequest req = RestContext.request;
@@ -22,7 +31,7 @@ global class comm_UpdateAccountDetailsRestResource {
         }
 
         try {
-            // Query the Account record to update
+            // set the Account record to update
             Account accountToUpdate = new Account();
             accountToUpdate.Id = recordId;
             accountToUpdate.Phone = phone;

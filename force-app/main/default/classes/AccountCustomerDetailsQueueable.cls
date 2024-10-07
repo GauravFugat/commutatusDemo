@@ -1,3 +1,11 @@
+/*
+* @Purpose: Queueable class to for commutatus callout handle
+* @Author: Gaurav Fugat
+* @CreatedDate: 06/10/2024
+* @Test Class: not created yet
+* @LastModifiedDate: 
+* @LastModifiedBy: 
+*/
 public class AccountCustomerDetailsQueueable implements Queueable, Database.AllowsCallouts {
     
     // List of accounts to process

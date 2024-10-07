@@ -1,4 +1,14 @@
+/*
+* @Purpose: Handler class to handle logic for account trigger
+* @Author: Gaurav Fugat
+* @CreatedDate: 06/10/2024
+* @Test Class: not created yet
+* @LastModifiedDate: 
+* @LastModifiedBy: 
+*/
 public class accountTriggerHandler {
+    
+    //method to send customer request to commutatus
     @Future(callout=true)
     public static void sendCustomerDetails(String recordId, String email, String tshirtSize, string shoeSize) {
         // Instantiate HTTP request and response
