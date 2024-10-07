@@ -1,0 +1,44 @@
+.custom-container {
+	color: black;
+}
+
+.main-container {
+	padding-inline: 130px;
+}
+
+.button-css {
+	display: flex;
+	justify-content: center;
+}
+
+.error-message {
+	font-size: x-large;
+	color: red;
+	display: flex;
+	justify-content: center;
+}
+
+.sucess-message {
+	font-size: x-large;
+	color: green;
+	display: flex;
+	justify-content: center;
+}
+
+.header-css {
+	font-size: x-large;
+	font-weight: 900;
+	display: flex;
+	justify-content: center;
+}
+
+.custname-css {
+	font-size: x-large;
+	font-weight: 700;
+}
+
+@media (max-width: 768px) {
+	.main-container {
+		padding-inline: 0px;
+	}
+}

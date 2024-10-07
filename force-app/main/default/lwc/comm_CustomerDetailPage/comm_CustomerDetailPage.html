@@ -1,0 +1,81 @@
+<template>
+    <template if:false={dataLoaded}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:true={dataLoaded}>
+        <template if:false={recordFound}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="12">
+                    <div class="custom-box">
+                        <h1 class={messageClass}> {errorMessage}</h1>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:true={recordFound}>
+            <lightning-layout multiple-rows class="main-container">
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="12">
+                    <div class="custom-box">
+                        <!-- Header -->
+                        <h1 class="header-css">Welcome To ABC Fashion Co.</h1>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="12">
+                    <div class="custom-box">
+                        <!-- Header -->
+                        <h1 class="custname-css">{name}</h1>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6"
+                    large-device-size="6">
+                    <div class="custom-box">
+                        <!-- Phone Number Input -->
+                        <lightning-input label="Phone Number" name="phone" value={phone} onchange={handleInputChange}
+                             type="tel" pattern="[0-9]{10}"
+                            message-when-pattern-mismatch="Phone number must be a 10-digit US/Canadian number" >
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6"
+                    large-device-size="6">
+                    <div class="custom-box">
+                        <!-- Date of Birth Input -->
+                        <lightning-input label="Date of Birth" name="dob" value={dob} onchange={handleInputChange}
+                            type="date" required class="required1">
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6"
+                    large-device-size="6">
+                    <div class="custom-box">
+                        <!-- T-shirt Size Picklist -->
+                        <lightning-combobox label="T-shirt Size" name="tshirtSize" value={tshirtSize}
+                            options={tshirtSizeOptions} onchange={handleInputChange} required class="required1">
+                        </lightning-combobox>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6"
+                    large-device-size="6">
+                    <div class="custom-box">
+                        <!-- Shoe Size Picklist -->
+                        <lightning-combobox label="Shoe Size" name="shoeSize" value={shoeSize} options={shoeSizeOptions}
+                            onchange={handleInputChange} required class="required1">
+                        </lightning-combobox>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="12">
+                    <div class="button-css">
+                        <!-- Save Button -->
+                        <lightning-button label="Save" onclick={handleSave} class="slds-m-top_medium" variant="brand">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+
+            </lightning-layout>
+        </template>
+    </template>
+</template>
